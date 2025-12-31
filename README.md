@@ -290,6 +290,40 @@ JOIN producto p ON ov.producto_id = p.producto_id;
 
 ---
 
+### 08_vistas_reportes.sql
+**Objetivo:** Crear vistas para simplificar consultas complejas recurrentes
+
+**Vistas incluidas:**
+
+```sql
+-- Vista maestra con todas las dimensiones unidas
+CREATE OR REPLACE VIEW view_order_details AS
+SELECT 
+    ov.factura,
+    ov.fecha,
+    c.nombre AS cliente,
+    v.nombre AS vendedor,
+    t.nombre AS tienda,
+    p.nombre AS producto,
+    ca.nombre AS categoria,
+    ov.cantidad,
+    ov.precio_venta,
+    ov.tipo_pago
+FROM order_venta ov
+JOIN cliente c ON ov.cliente_id = c.cliente_id
+JOIN vendedor v ON ov.vendedor_id = v.vendedor_id
+JOIN tienda t ON v.tienda_id = t.tienda_id
+JOIN producto p ON ov.producto_id = p.producto_id
+JOIN categoria ca ON p.categoria_id = ca.categoria_id;
+```
+
+**Beneficios:**
+- Consultas simplificadas (un solo SELECT en lugar de múltiples JOINs)
+- Reportes rápidos sin repetir código
+- Capa de abstracción para análisis de negocio
+
+---
+
 ## 🧪 Verificación del Pipeline
 
 Después de ejecutar todos los scripts, verifica la integridad:
@@ -336,7 +370,8 @@ WHERE c.cliente_id IS NULL;
     ├── 04_carga_datos.sql    # Migración staging → core
     ├── 05_consultas_basicas.sql   # SQL nivel 1
     ├── 06_consultas_join.sql      # SQL nivel 2
-    └── 07_analisis_negocio.sql    # SQL nivel 3
+    ├── 07_analisis_negocio.sql    # SQL nivel 3
+    └── 08_vistas_reportes.sql     # Vistas para reportes
 ```
 
 ---
