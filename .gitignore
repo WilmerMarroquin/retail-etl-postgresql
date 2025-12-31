@@ -1,0 +1,77 @@
+# =============================================================================
+# .gitignore - Retail ETL Project
+# Archivos y directorios que NO deben subirse a Git
+# =============================================================================
+
+# 1. DATOS Y CONFIGURACIÓN SENSIBLE
+# ===================================
+# Variables de entorno con credenciales
+.env
+.env.local
+.env.*.local
+
+# Datos generados (demasiado grandes para Git)
+data/raw_sales_data.csv
+data/*.csv
+
+# Backups de base de datos
+*.sql.backup
+backup.sql
+*.dump
+
+# 2. ARCHIVOS DEL SISTEMA
+# =======================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+*.swp
+*.swo
+*~
+
+# Windows
+Thumbs.db
+.vscode/settings.json
+
+# Linux
+.directory
+.trash
+
+# 3. ARCHIVOS DE IDE Y EDITOR
+# =============================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# 4. LOGS Y ARCHIVOS TEMPORALES
+# ===============================
+*.log
+logs/
+*.tmp
+.cache/
+
+# 5. DEPENDENCIAS (si se añaden en el futuro)
+# ============================================
+venv/
+.venv/
+env/
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# 6. DOCKER
+# =========
+# Volúmenes locales (los datos se regeneran)
+.docker/data/
+
+# 7. GIT
+# ======
+.git/
